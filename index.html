@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<meta charset="utf-8">
 
 <style>
     .axis path,
@@ -20,7 +21,10 @@
 </style>
 
 <body>
-<meta charset="utf-8">
+
+<div class="above"></div>
+<div class="below"></div>
+
 <script src="d3.v3.min.js"></script>
 <script>
 
@@ -53,7 +57,7 @@
 
     // PLOTS ABOVE
 
-    var svg1 = d3.select("body")
+    var svg1 = d3.select(".above")
         .append("svg")
         .attr("class", "svg1")
         .attr("width", width)
@@ -134,7 +138,7 @@
 
     // PLOTS UNDER
 
-    var svg2 = d3.select("body")
+    var svg2 = d3.select(".below")
         .append("svg")
         .attr("class", "svg2")
         .attr("width", width)
