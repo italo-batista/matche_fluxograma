@@ -1,7 +1,7 @@
 
 
-var box_width = 150,
-    box_height = 150,
+var box_width = 250,
+    box_height = box_width,
     box_padding = 5;
 
 var width = box_width * 4,
@@ -10,9 +10,9 @@ var width = box_width * 4,
 
 var color = d3.scale.category10();
 
-var circle_radius = 2;
+var circle_radius = 1.5;
 var max_freq_periodo = {1: 6, 2: 7, 3: 7, 4: 7, 5: 7, 6: 6, 7: 3, 8: 1};
-var padding_line = 0.6;
+var padding_line = 0.3;
 var padding_x0 = 22;
 
 var yAxisPadding = 20;
@@ -96,6 +96,14 @@ function plot_above(periodo) {
                 return color(d.periodo);
             });
 
+        box.append("text")
+            .attr("class", "label")
+            .attr("y", box_height - 6)
+            .attr("x", box_width / 2 - 20)
+            .attr("font-family","Verdana")
+            .attr("font-size","12")
+            .text(periodo + " periodo");
+
         d3.select("svg.svg1")
             .append("line")
             .attr("class", "mean-line")
@@ -177,6 +185,14 @@ function plot_under(periodo) {
             .style("fill", function (d) {
                 return color(d.periodo);
             });
+
+        box.append("text")
+            .attr("class", "label")
+            .attr("y", box_height - 6)
+            .attr("x", box_width / 2 - 20)
+            .attr("font-family","Verdana")
+            .attr("font-size","12")
+            .text(periodo + " periodo");
 
         d3.select("svg.svg2")
             .append("line")
