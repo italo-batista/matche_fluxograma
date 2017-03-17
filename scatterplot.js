@@ -4,7 +4,7 @@ var box_width = 250,
     box_height = box_width,
     box_padding = 5;
 
-var width = box_width * 4,
+var width = box_width * 4 + 2,
     height = box_height,
     padding = 25;
 
@@ -14,6 +14,8 @@ var circle_radius = 1.5;
 var max_freq_periodo = {1: 6, 2: 7, 3: 7, 4: 7, 5: 7, 6: 6, 7: 3, 8: 1};
 var padding_line = 0.3;
 var padding_x0 = 22;
+var padding_box = 23;
+var top = 5;
 
 var yAxisPadding = 20;
 
@@ -44,6 +46,25 @@ plot_above(5);
 plot_above(6);
 plot_above(7);
 plot_above(8);
+
+
+// PLOTS UNDER
+
+var svg2 = d3.select(".below")
+    .append("svg")
+    .attr("class", "svg2")
+    .attr("width", width)
+    .attr("height", height);
+
+svg2.append("g")
+    .attr("class", "axis")
+    .attr("transform", "translate(" + yAxisPadding + ",0)")
+    .call(yAxis);
+
+plot_under(1);
+plot_under(2);
+plot_under(3);
+plot_under(4);
 
 function plot_above(periodo) {
 
@@ -105,36 +126,24 @@ function plot_above(periodo) {
             .text(periodo + " periodo");
 
         d3.select("svg.svg1")
+            .append("rect")
+            .attr("class", "frame")
+            .attr("x", x0 + padding_box)
+            .attr("y", 14.3)
+            .attr("width", box_width - padding_box)
+            .attr("height", height - 35);
+
+        d3.select("svg.svg1")
             .append("line")
-            .attr("class", "mean-line")
+            .attr("id", "top")
             .attr("x1", x0 + padding_x0)
             .attr("x2", x0 + box_width)
             .attr("y1", yScale(max_freq_periodo[periodo] + padding_line))
-            .attr("y2", yScale(max_freq_periodo[periodo] + padding_line))
-            .style("stroke", "rgb(189, 189, 189)");
+            .attr("y2", yScale(max_freq_periodo[periodo] + padding_line));
 
     }); // close read data
 
 }
-
-
-// PLOTS UNDER
-
-var svg2 = d3.select(".below")
-    .append("svg")
-    .attr("class", "svg2")
-    .attr("width", width)
-    .attr("height", height);
-
-svg2.append("g")
-    .attr("class", "axis")
-    .attr("transform", "translate(" + yAxisPadding + ",0)")
-    .call(yAxis);
-
-plot_under(1);
-plot_under(2);
-plot_under(3);
-plot_under(4);
 
 function plot_under(periodo) {
 
@@ -195,13 +204,21 @@ function plot_under(periodo) {
             .text(periodo + " periodo");
 
         d3.select("svg.svg2")
+            .append("rect")
+            .attr("class", "frame")
+            .attr("x", x0 + padding_box)
+            .attr("y", 14.3)
+            .attr("width", box_width - padding_box)
+            .attr("height", height - 35);
+
+        d3.select("svg.svg2")
             .append("line")
-            .attr("class", "mean-line")
+            .attr("id", "top")
             .attr("x1", x0 + padding_x0)
             .attr("x2", x0 + box_width)
             .attr("y1", yScale(max_freq_periodo[periodo] + padding_line))
-            .attr("y2", yScale(max_freq_periodo[periodo] + padding_line))
-            .style("stroke", "rgb(189, 189, 189)");
+            .attr("y2", yScale(max_freq_periodo[periodo] + padding_line));
+
 
     }); // close read data
 

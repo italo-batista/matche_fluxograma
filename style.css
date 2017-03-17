@@ -13,3 +13,12 @@
 .dot {
     stroke: #000;
 }
+
+.frame {
+    fill: none;
+    stroke: #000;
+}
+
+#top {
+    stroke: rgb(189, 189, 189);
+}
