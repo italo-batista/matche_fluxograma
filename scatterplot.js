@@ -75,8 +75,7 @@ d3.csv("data.csv", function (error, data) {
         .domain([min_mat, max_mat])
         .range([padding, box_width - box_padding]);
 
-    /*
-    var brushBox;
+    var brushBoxes = [];
 
     var brush = d3.svg.brush()
         .x(xScale)
@@ -84,7 +83,6 @@ d3.csv("data.csv", function (error, data) {
         .on("brushstart", brushstart)
         .on("brush", brushmove)
         .on("brushend", brushend);
-    */
 
     for (periodo = 1; periodo <= 8; periodo++) {
 
@@ -149,34 +147,55 @@ d3.csv("data.csv", function (error, data) {
             .attr("y1", yScale(max_freq_periodo[periodo] + padding_line))
             .attr("y2", yScale(max_freq_periodo[periodo] + padding_line));
 
-        // box.call(brush);
+         ref = box.call(brush);
+         brushBoxes.push(ref);
     }
 
-    /*
-    function brushstart(p) {
-        if (brushBox !== this) {
-            d3.select(brushBox).call(brush.clear());
-            xScale.domain([p.x]);
-            yScale.domain([p.y]);
-            brushBox = this;
+    function brushstart() {
+        for (i = 0; i <= 7; i++) {
+            if (brushBoxes[i] !== this) {
+                brushBoxes[i].call(brush.clear());
+            }
         }
     }
 
-    function brushmove(p) {
+    function brushmove() {
+
         var e = brush.extent();
-        svg1.selectAll("g").selectAll("circle").classed("hidden", function(d) {
-            return e[0][0] > d[p.x] || d[p.x] > e[1][0]
-                || e[0][1] > d[p.y] || d[p.y] > e[1][1];
+        var periodo = parseInt(d3.select(this)[0][0].textContent[0]);
+
+        var mat_selecteds = data.filter(function (d) {
+            return d.periodo === periodo &&
+                   (d.mat >= e[0][0]  && d.mat <= e[1][0] &&
+                    d.freq >= e[0][1] && d.freq <= e[1][1]);
         });
-        svg2.selectAll("g").selectAll("circle").classed("hidden", function(d) {
-            return e[0][0] > d[p.x] || d[p.x] > e[1][0]
-                || e[0][1] > d[p.y] || d[p.y] > e[1][1];
+
+        function isMatSelected(mat) {
+            var ans = false;
+            for (i = 0; i < mat_selecteds.length; i++) {
+                var student = mat_selecteds[i];
+                if (student.mat == mat) {
+                    ans = true;
+                }
+            }
+            return ans;
+        }
+
+        svg1.selectAll("circle").classed("hidden", function(d) {
+            return !isMatSelected(d.mat);
         });
+
+        svg2.selectAll("circle").classed("hidden", function(d) {
+            return !isMatSelected(d.mat);
+        });
+
     }
 
     function brushend() {
-        if (brush.empty()) svg2.selectAll(".hidden").classed("hidden", false);
+        if (brush.empty()) {
+            svg1.selectAll(".hidden").classed("hidden", false);
+            svg2.selectAll(".hidden").classed("hidden", false);
+        }
     }
-    */
-}); // close read data
 
+}); // close read data
