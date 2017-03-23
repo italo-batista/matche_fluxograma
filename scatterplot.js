@@ -60,8 +60,9 @@ d3.csv("data.csv", function (error, data) {
 
     data.forEach(function (d) {
         d.mat = +d.mat,
-            d.periodo = +d.periodo,
-            d.freq = +d.freq
+        d.periodo = +d.periodo,
+        d.freq = +d.freq,
+        d.semestre = +d.semestre
     });
 
     max_mat = d3.max(data, function (d) {
