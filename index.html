@@ -8,15 +8,34 @@
 
 <body>
 
-    <div class="above"></div>
-    <div class="below"></div>
+    <h2>Popularity of UFCG computer science course flowchart</h2>
 
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <div class="container">
+        <div class="above"></div>
+        <div class="below"></div>
+
+        <button class="tips" onclick="showTips()">TIPS</button>
+    </div>
+
+    <div id="snackbar">
+        Here we have a graphic about popularity of UFCG computer science course flowchart.
+        Each box is a semester and each circle is a graduated student in a specific semester
+        (from her/his first to her/his last semester). The y axis corresponds to the number of courses
+        (he/she did at this i-th semester) that correspond to the indicated at the flowchart.
+        If you select some students (circles) at a box, they will be also selected at the rest of boxes, so
+        you can see how a specific student (or a group of students) followed what the course flowchart indicates.
+    </div>
 
     <!--Importing D3-->
-    <script src="d3.v3.min.js"></script>
+    <script src="libs/d3.v3.min.js"></script>
 
     <!--Scatter plot script-->
     <script src="scatterplot.js"></script>
+
+    <!--CSS -->
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link href="libs/googlefonts.css" rel="stylesheet">
+
+    <script src="snackbar.js"></script>
 </body>
 </html>
