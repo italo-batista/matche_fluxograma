@@ -1,6 +1,6 @@
 
 
-var box_width = 250,
+var box_width = 300,
     box_height = box_width,
     box_padding = 5;
 
@@ -10,9 +10,9 @@ var width = box_width * 4 + 2,
 
 var color = d3.scale.category10();
 
-var circle_radius = 1.5;
+var circle_radius = 1.7;
 var max_freq_periodo = {1: 6, 2: 7, 3: 7, 4: 7, 5: 7, 6: 6, 7: 3, 8: 1};
-var padding_line = 0.3;
+var padding_line = 0.18;
 var padding_x0 = 22;
 var padding_box = 23;
 var top = 5;
